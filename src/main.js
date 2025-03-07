@@ -13,7 +13,7 @@ document.querySelector('#app').innerHTML = `
     </a>
     <h1>Omar Gatara</h1>
     <p class="read-the-docs">
-      Click on the Vite logo to learn more
+      My Personal website is comming soon, stay toned!
     </p>
   </div>
 `
