@@ -128,6 +128,22 @@ function attachEventListeners() {
   // Attach form submission listener
   document.getElementById('newsletter-form')?.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    // Create and show the popup with the card and loader
+    const popup = createPopup(`
+      <div class="banter-loader">
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+      </div>
+    `);
+
     const formData = {
       firstName: e.target.firstName.value,
       lastName: e.target.lastName.value,
@@ -136,31 +152,82 @@ function attachEventListeners() {
       state: e.target.state.value,
       userType: e.target.userType.value
     };
-  
+
     try {
       // Construct the URL with query parameters
       const url = new URL('https://script.google.com/macros/s/AKfycbwusUJIl5YtuYo6ixWxRoQiE4R63-AYUrUSnGr8JO5UV3JaQ8Xw5OsOwUSVvTkgI2ss3g/exec');
       url.search = new URLSearchParams(formData).toString();
-  
+
       // Send a GET request
       const response = await fetch(url, {
         method: 'GET',
         redirect: 'follow' // Follow redirects (required for Google Apps Script)
       });
-  
+
       if (response.ok) {
-        alert('Thanks for subscribing! We\'ll be in touch soon.');
-        render(homePage);
+        // Replace the loader with a success message
+        popup.querySelector('.card-image').innerHTML = `
+          <div class="success-message">
+            <p>Thanks for subscribing! Stay tuned...</p>
+          </div>
+        `;
+        setTimeout(() => {
+          closePopup(popup);
+          render(homePage);
+        }, 3000); // Close the popup and render the home page after 3 seconds
       } else {
-        alert('Something went wrong. Please try again.');
+        // Replace the loader with a failure message
+        popup.querySelector('.card-image').innerHTML = `
+          <div class="error-message">
+            <p>Something went wrong. Please try again.</p>
+          </div>
+        `;
+        setTimeout(() => {
+          closePopup(popup);
+        }, 3000); // Close the popup after 3 seconds
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('Failed to submit the form. Please try again.');
+      // Replace the loader with a failure message
+      popup.querySelector('.card-image').innerHTML = `
+        <div class="error-message">
+          <p>Failed to submit the form. Please try again.</p>
+        </div>
+      `;
+      setTimeout(() => {
+        closePopup(popup);
+      }, 3000); // Close the popup after 3 seconds
     }
   });
 }
 
+// Function to create a popup
+function createPopup(content) {
+  const popup = document.createElement('div');
+  popup.className = 'popup';
+  popup.innerHTML = `
+    <div class="card">
+      <div class="card-content">
+        <div class="card-top">
+        </div>
+        <div class="card-bottom">
+        </div>
+      </div>
+      <div class="card-image">
+        ${content} <!-- Loader or message will go here -->
+      </div>
+    </div>
+  `;
+  document.body.appendChild(popup);
+  return popup;
+}
+
+// Function to close the popup
+function closePopup(popup) {
+  document.body.removeChild(popup);
+}
+
+// Router setup
 router
   .on('/', () => {
     render(homePage);
