@@ -1,5 +1,5 @@
 import './style.css';
-import javascriptLogo from './logo.jpg';
+import javascriptLogo from './logo.webp';
 import viteLogo from './gatara-logo.svg';
 import Navigo from 'navigo';
 
@@ -168,7 +168,7 @@ function attachEventListeners() {
         // Replace the loader with a success message
         popup.querySelector('.card-image').innerHTML = `
           <div class="success-message">
-            <p>Thanks for subscribing! Stay tuned...</p>
+            <p>Thanks for subscribing!<br>Stay tuned...</p>
           </div>
         `;
         setTimeout(() => {
@@ -179,7 +179,7 @@ function attachEventListeners() {
         // Replace the loader with a failure message
         popup.querySelector('.card-image').innerHTML = `
           <div class="error-message">
-            <p>Something went wrong. Please try again.</p>
+            <p>Something went wrong.<br>Please try again.</p>
           </div>
         `;
         setTimeout(() => {
@@ -191,7 +191,7 @@ function attachEventListeners() {
       // Replace the loader with a failure message
       popup.querySelector('.card-image').innerHTML = `
         <div class="error-message">
-          <p>Failed to submit the form. Please try again.</p>
+          <p>Failed to submit the form.<br>Please try again.</p>
         </div>
       `;
       setTimeout(() => {
