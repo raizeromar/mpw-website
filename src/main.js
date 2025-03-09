@@ -21,7 +21,10 @@ const homePage = `
     </a>
     <h1>Omar Gatara</h1>
     <p class="read-the-docs">
-      My Personal website is coming soon, stay tuned!
+      My personal website is launching soon—stay tuned!
+    </p>
+    <p class="read-the-docs">
+      In the meantime, subscribe to my newsletter to stay ahead in AI.<br>Get insights tailored for developers and business leaders...
     </p>
     <button id="subscribe-btn">Subscribe to Newsletter</button>
   </div>
