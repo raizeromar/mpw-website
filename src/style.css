@@ -61,6 +61,8 @@ h1 {
 
 .read-the-docs {
   color: #888;
+  max-width: 600px;
+  margin: 0 auto 2rem;
 }
 
 button {
@@ -80,6 +82,83 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Newsletter styles */
+.newsletter-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.form-row input {
+  flex: 1;
+}
+
+.newsletter-form input {
+  padding: 0.8em 1em;
+  border-radius: 8px;
+  border: 1px solid #646cff;
+  background-color: transparent;
+  color: inherit;
+  font-size: 1em;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.radio-group {
+  text-align: left;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #646cff;
+}
+
+.radio-group h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1em;
+  color: #888;
+}
+
+.radio-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+  width: auto;
+  margin-top: 0.3rem;
+}
+
+.newsletter-form button {
+  background-color: #646cff;
+  color: white;
+  padding: 1em;
+  transition: background-color 0.25s;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.newsletter-form button:hover {
+  background-color: #535bf2;
 }
 
 @media (prefers-color-scheme: light) {
