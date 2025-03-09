@@ -90,7 +90,7 @@ const NewsletterPage = () => {
           
           <label class="radio-label">
             <input type="radio" name="userType" value="researcher">
-            I'm a researcher/ML engineer working on AI projects
+            I'm a AI developer/researcher working on AI projects
           </label>
           
           <label class="radio-label">
