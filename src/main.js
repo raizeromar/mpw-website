@@ -126,24 +126,39 @@ function attachEventListeners() {
   }
 
   // Attach form submission listener
-  const newsletterForm = document.getElementById('newsletter-form');
-  if (newsletterForm) {
-    newsletterForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const formData = {
-        firstName: e.target.firstName.value,
-        lastName: e.target.lastName.value,
-        email: e.target.email.value,
-        city: e.target.city.value,
-        state: e.target.state.value,
-        userType: e.target.userType.value
-      };
-      // Here you would typically send this to your backend
-      console.log('Newsletter subscription:', formData);
-      alert('Thanks for subscribing! We\'ll be in touch soon.');
-      render(homePage);
-    });
-  }
+  document.getElementById('newsletter-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = {
+      firstName: e.target.firstName.value,
+      lastName: e.target.lastName.value,
+      email: e.target.email.value,
+      city: e.target.city.value,
+      state: e.target.state.value,
+      userType: e.target.userType.value
+    };
+  
+    try {
+      // Construct the URL with query parameters
+      const url = new URL('https://script.google.com/macros/s/AKfycbwusUJIl5YtuYo6ixWxRoQiE4R63-AYUrUSnGr8JO5UV3JaQ8Xw5OsOwUSVvTkgI2ss3g/exec');
+      url.search = new URLSearchParams(formData).toString();
+  
+      // Send a GET request
+      const response = await fetch(url, {
+        method: 'GET',
+        redirect: 'follow' // Follow redirects (required for Google Apps Script)
+      });
+  
+      if (response.ok) {
+        alert('Thanks for subscribing! We\'ll be in touch soon.');
+        render(homePage);
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Failed to submit the form. Please try again.');
+    }
+  });
 }
 
 router
